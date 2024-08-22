@@ -1,3 +1,5 @@
+import {useState} from 'react';
+
 const initialItems = [
   {id: 1, description: 'Passports', quantity: 2, packed: true},
   {id: 2, description: 'Socks', quantity: 12, packed: false},
@@ -21,18 +23,44 @@ function Logo() {
 }
 
 function Form() {
+  const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
-    <div className='add-form'>
+    <form className='add-form' onSubmit={handleSubmit}>
       <h3>What do you need for your trip?</h3>
-    </div>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {/* Method to create array from 1-20 and iterate over it for options 1-20 */}
+        {Array.from({length: 20}, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type='text'
+        placeholder='Item....'
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      ></input>
+      <button>Add</button>
+    </form>
   );
 }
+
 function PackingList() {
   return (
     <div className='list'>
       <ul>
         {initialItems.map((item) => (
-          <Item item={item} />
+          <Item item={item} key={item.id} />
         ))}
       </ul>
     </div>
@@ -57,3 +85,8 @@ function Stats() {
     </footer>
   );
 }
+
+// NOTES
+// - Number() function converts number from form inputfield into number
+// - Method to create array 1-20 in option of form -> see Form component
+// - Always add not only onChange to change state (e.g. setCount), but also value={e.g. count}
