@@ -27,7 +27,19 @@ function Form() {
   const [quantity, setQuantity] = useState(1);
 
   function handleSubmit(e) {
+    // Prevent refresh
     e.preventDefault();
+
+    // Prevent empty description item to be submitted into new object
+    if (!description) return;
+
+    // Get data out of the form and put it in new object
+    const newItem = {description, quantity, packed: false, id: Date.now()};
+    console.log(newItem);
+
+    // Set back useState object to default state
+    setDescription('');
+    setQuantity(1);
   }
 
   return (
