@@ -101,3 +101,15 @@ function Stats() {
 // - Number() function converts number from form inputfield into number
 // - Method to create array 1-20 in option of form -> see Form component
 // - Always add not only onChange to change state (e.g. setCount), but also value={e.g. count}
+// -----
+// THINKING IN REACT
+// 1. Break UI in components and establish a component tree
+// 2. Build a static version in React (without state)
+// 3. Think about state:
+// -- When to use state
+// -- Types of state: local vs global
+// -- Where to place each piece of state
+// 4. Establish data flow:
+// -- One-way data flow
+// -- Child to parent communication
+// -- Accessing global state
